@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Net Promoter Score</title>
+  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+  <style>
+    .right { text-align: right; }
+    .center { text-align: center; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <form #f="ngForm" autocomplete="off">
+    <div class="page-header">
+      <h1>Pesquisa de satisfa&ccedil;&atilde;o</h1>
+    </div>
+    <p *ngIf="mostrarPesquisa" class="lead">{{pesquisa.pergunta}}<br/><br/></p>
+
+    <p-messages *ngIf="pesquisaNaoEncontrada" severity="error">
+      <ng-template pTemplate>
+        <img src="../../../assets/warning.svg" width="32" >
+        <div class="p-ml-4">Não foi possível montar a pesquisa, entre em contato com o administrador.</div>
+      </ng-template>
+    </p-messages>
+
+    <p-messages *ngIf="pesquisaEnviaSucesso" severity="success">
+      <ng-template pTemplate>
+        <img src="../../../assets/check.png" width="32" >
+        <div class="p-ml-4">Pesquisa enviada com sucesso!</div>
+      </ng-template>
+    </p-messages>
+
+    <div *ngIf="mostrarPesquisa" class="row-fluid right">
+      <h3>
+        <div class="span1"> <input required [(ngModel)]="resultado.resposta" #nota=ngModel type="radio" name="nota" value="0"> 0 </div>
+        <div class="span1"> <input required [(ngModel)]="resultado.resposta" #nota=ngModel type="radio" name="nota" value="1"> 1 </div>
+        <div class="span1"> <input required [(ngModel)]="resultado.resposta" #nota=ngModel type="radio" name="nota" value="2"> 2 </div>
+        <div class="span1"> <input required [(ngModel)]="resultado.resposta" #nota=ngModel type="radio" name="nota" value="3"> 3 </div>
+        <div class="span1"> <input required [(ngModel)]="resultado.resposta" #nota=ngModel type="radio" name="nota" value="4"> 4 </div>
+        <div class="span1"> <input required [(ngModel)]="resultado.resposta" #nota=ngModel type="radio" name="nota" value="5"> 5 </div>
+        <div class="span1"> <input required [(ngModel)]="resultado.resposta" #nota=ngModel type="radio" name="nota" value="6"> 6 </div>
+        <div class="span1"> <input required [(ngModel)]="resultado.resposta" #nota=ngModel type="radio" name="nota" value="7"> 7 </div>
+        <div class="span1"> <input required [(ngModel)]="resultado.resposta" #nota=ngModel type="radio" name="nota" value="8"> 8 </div>
+        <div class="span1"> <input required [(ngModel)]="resultado.resposta" #nota=ngModel type="radio" name="nota" value="9"> 9 </div>
+        <div class="span2 center"> <input required [(ngModel)]="resultado.resposta" #nota=ngModel type="radio" name="nota" value="10"> 10 </div>
+      </h3>
+    </div>
+    <br/>
+    <div *ngIf="mostrarPesquisa" class="row-fluid progress progress-striped">
+      <div title="Raramente" class="bar bar-danger" style="width: 27%;"></div>
+      <div title="Talvez" class="bar bar-warning" style="width: 34%;"></div>
+      <div title="Bem provável" class="bar bar-success" style="width: 25%;"></div>
+      <div title="Certamente" class="bar" style="width: 14%;"></div>
+    </div>
+    <div *ngIf="mostrarPesquisa" class="row-fluid">
+      <div class="span12 center">
+        <div class="span1">Raramente</div>
+        <div class="span1 offset4">Talvez</div>
+        <div class="span2 offset1">Bem prov&aacute;vel</div>
+        <div class="span1 offset1">Certamente</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-2">
+      </div>
+      <div class="col-8" *ngIf="mostrarPesquisa" class="form-group green-border-focus">
+        <p align="center" class="lead">Justifique sua resposta</p>
+        <textarea id="justificativa" cols="100%" name="justificativa" #justificativa="ngModel" [(ngModel)]="resultado.justificativa" class="form-control" id="exampleFormControlTextarea5" rows="10"></textarea>
+      </div>
+    </div>
+
+    <div *ngIf="mostrarPesquisa" class="page-header" style="padding-top: 50px;"></div>
+    <div align="center" >
+      <button class="btn btn-info btn-large"  [disabled]="!f.form.valid" type="button" *ngIf="mostrarPesquisa" (click)="enviarResposta()" >Enviar resposta <i class="icon-ok"></i></button>
+    </div>
+  </form>
+</div>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+</body>
+</html>

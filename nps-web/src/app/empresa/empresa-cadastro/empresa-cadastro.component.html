@@ -1,0 +1,47 @@
+<app-adm-template [title]="TituloPagina" [breadcrumbs]="[['Empresa', '/empresa']]">
+<!--        {{ agente | json }}-->
+<form #f="ngForm" autocomplete="off">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-outline card-info">
+          <div class="card-header">
+            <h3 class="card-title">
+              <strong>Dados da empresa</strong>
+            </h3>
+          </div>
+
+          <div class="card-body pad">
+
+            <div class="ui-fluid p-formgrid p-grid">
+              <div class="p-field p-col-3 ui-fluid">
+                <label class="required" for="cnpj">Cnpj</label>
+                <input class="form-control" type="text" required [(ngModel)]="empresa.cnpj" id="cnpj" #cnpj="ngModel" name="cnpj" >
+              </div>
+
+              <div class="p-field p-col-9 ui-fluid">
+                <label class="required" for="razaoSocial">Razão Social</label>
+                <input  class="form-control" type="text" required [(ngModel)]="empresa.razaoSocial" id="razaoSocial" #razaoSocial="ngModel" name="razaoSocial" >
+              </div>
+
+              <div class="p-field p-col-6 ui-fluid">
+                <label class="required" for="fantasia">Fantasia</label>
+                <input pInputText class="form-control" type="text" required [(ngModel)]="empresa.fantasia" id="fantasia" #fantasia="ngModel" name="fantasia" >
+              </div>
+
+              <div class="p-field p-col-6 ui-fluid">
+                <label for="email">email</label>
+                <input pInputText class="form-control" type="text" [(ngModel)]="empresa.email" id="email" #email="ngModel" name="email" >
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar-fixed-bottom main-footer" style="z-index: 999999999999999999;">
+      <button type="button" class="btn btn-lg btn-default" routerLink="/empresa">voltar</button>
+      <button type="submit" class="btn btn-primary btn-lg float-right" [disabled]="!f.form.valid" (click)="salvar(f)">Salvar</button>
+    </div>
+</form>
+</app-adm-template>

@@ -1,0 +1,15 @@
+<div class="wrapper">
+  <app-adm-header></app-adm-header>
+  <app-adm-menu></app-adm-menu>
+  <div class="content-wrapper" style="min-height: 952.523px;">
+    <div class="content" [@pageAppeared]="homeState">
+
+      <app-adm-header-detail [title]="title" [breadcrumbs]="breadcrumbs"> </app-adm-header-detail>
+      <section class="content">
+        <ng-content></ng-content>
+      </section>
+    </div>
+  </div>
+  <app-adm-aside></app-adm-aside>
+  <app-adm-footer></app-adm-footer>
+</div>

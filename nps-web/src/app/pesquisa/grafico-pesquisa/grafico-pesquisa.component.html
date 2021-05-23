@@ -1,0 +1,70 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-4 col-6">
+      <div class="small-box bg-success">
+        <div class="inner">
+          <p>% Promotores</p>
+          <h4>{{resultadoPesquisa.percPromotores | number :'2.1-2'}}% - Qtde: {{resultadoPesquisa.qtdePromotores}}</h4>
+        </div>
+        <div class="icon">
+          <i class="ion ion-bag"></i>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-6">
+      <div class="small-box bg-warning">
+        <div class="inner">
+          <p>% Neutros</p>
+          <h4>{{resultadoPesquisa.percNeutros | number:'2.1-2' }}% - Qtde: {{resultadoPesquisa.qtdeNeutros}}</h4>
+        </div>
+        <div class="icon">
+          <i class="ion ion-stats-bars"></i>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-6">
+      <div class="small-box bg-danger">
+        <div class="inner">
+          <p>% Detratores</p>
+          <h4>{{resultadoPesquisa.percDetratores| number:'2.1-2'}}% - Qtde: {{resultadoPesquisa.qtdeDetratores}}</h4>
+        </div>
+        <div class="icon">
+          <i class="ion ion-person-add"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-12 col-6">
+      <p-chart type="doughnut" [data]="data"></p-chart>
+    </div>
+
+    <div class="col-lg-6 col-6">
+      <div class="small-box bg-{{resultadoPesquisa.corClassificacao}}">
+        <div class="inner">
+          <p align="center" ><strong>NPS</strong></p>
+          <h4  align="center" >{{resultadoPesquisa.nps | number:'2.1-2'}}</h4>
+        </div>
+        <div class="icon">
+          <i class="ion ion-person-add"></i>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-lg-6 col-6">
+      <div class="small-box bg-{{resultadoPesquisa.corClassificacao}}">
+        <div class="inner">
+          <p align="center" ><strong>Classificação</strong></p>
+          <h4  align="center" >{{resultadoPesquisa.classificacao}}</h4>
+        </div>
+        <div class="icon">
+          <i class="ion ion-person-add"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-12 col-6">
+      <img style="display: block; margin-left: auto; margin-right: auto"  src="../../../assets/nps.png" >
+    </div>
+  </div>
+</div>

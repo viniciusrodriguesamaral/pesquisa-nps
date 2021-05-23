@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/nps-ws/nps.iml" filepath="$PROJECT_DIR$/nps-ws/nps.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/pequisa_nps.iml" filepath="$PROJECT_DIR$/.idea/pequisa_nps.iml" />
+    </modules>
+  </component>
+</project>

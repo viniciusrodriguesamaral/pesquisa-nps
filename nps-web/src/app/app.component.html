@@ -1,0 +1,10 @@
+<router-outlet></router-outlet>
+<!--<app-snackbar></app-snackbar>-->
+
+<p-toast position="top-right"></p-toast>
+<p-confirmDialog #confirmacao >
+  <p-footer>
+    <button type="button" pButton icon="pi pi-check" (click)="confirmacao.accept()"  label="Sim"></button>
+    <button type="button" pButton icon="pi pi-times" (click)="confirmacao.reject()" label="Não"></button>
+  </p-footer>
+</p-confirmDialog>

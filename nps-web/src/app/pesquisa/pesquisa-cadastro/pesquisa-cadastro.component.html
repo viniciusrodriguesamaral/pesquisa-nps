@@ -1,0 +1,89 @@
+<app-adm-template [title]="TituloPagina" [breadcrumbs]="[['Pesquisa', '/pesquisas']]">
+<form #f="ngForm" autocomplete="off">
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="card card-outline card-info">
+        <div class="card-header">
+          <h3 class="card-title">
+            <strong>Dados da empresa</strong>
+          </h3>
+        </div>
+
+        <div class="card-body pad">
+          <div *ngIf="pesquisa.id > 0"  class="ui-fluid p-formgrid p-grid">
+            <div class="p-field p-col-3 ui-fluid">
+              <label class="required" for="cnpj">Cnpj</label>
+              <input disabled class="form-control" type="text" required [(ngModel)]="pesquisa.empresa.cnpj" id="cnpj" #cnpj="ngModel" name="cnpj" >
+            </div>
+
+            <div class="p-field p-col-9 ui-fluid">
+              <label class="required" for="razaoSocial">Razão Social</label>
+              <input disabled class="form-control" type="text" required [(ngModel)]="pesquisa.empresa.razaoSocial" id="razaoSocial" #razaoSocial="ngModel" name="razaoSocial" >
+            </div>
+          </div>
+
+          <div *ngIf="pesquisa.id === 0"  class="ui-fluid p-formgrid p-grid">
+            <div  class="p-field p-col-12">
+              <label for="empre" class="required" >Informe a empresa</label>
+              <p-autoComplete
+                id="empre"
+                required
+                name="empre"
+                field="codigoDescricao"
+                [forceSelection]="true"
+                minLength="3"
+                (onClear)="pesquisa.empresa = undefined"
+                #empre="ngModel"
+                size="100%"
+                [(ngModel)]="pesquisa.empresa"
+                [suggestions]="listaEmpresa"
+                maxlength="150"
+                placeholder="Pesquisar cnpj, razão social ou fantasia da empresa "
+                title="Pesquisar cnpj, razão social ou fantasia da empresa"
+                [style]="{'width':'100%','border-radius':'0px','font-size':'13px', 'font-color':'#1b81d7'}"
+                (completeMethod)="pesquisaEmpresa($event)"
+                autocomplete="off">
+
+                <ng-template let-emp pTemplate="selectedItem">
+                  <strong>Código: </strong> {{emp.id }} - <strong>Razão Social: </strong>{{emp.razaoSocial}} - <strong>Fantasia: </strong>{{emp.fantasia}}
+                </ng-template>
+
+                <ng-template let-emp pTemplate="item">
+                  <strong>Código: </strong> {{emp.id }} - <strong>Razão Social: </strong>{{emp.razaoSocial}} - <strong>Fantasia: </strong>{{emp.fantasia}}
+                </ng-template>
+              </p-autoComplete>
+<!--              <small *ngIf="showError(cliente, f)" class="text-danger">-->
+<!--                A empresa é obrigatório.-->
+<!--              </small>-->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-outline card-info">
+        <div class="card-header">
+          <h3 class="card-title">
+            <strong>Dados da pesquisa</strong>
+          </h3>
+        </div>
+        <div class="card-body pad">
+          <div class="ui-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 ui-fluid">
+              <label class="required" for="pergunta">Qual a pergunta da pesquisa?</label>
+<!--              <textarea [(ngModel)]="pesquisa.pergunta" [rows]="5" name="pergunta" id="pergunta" #pergunta pInputTextarea></textarea>-->
+              <input class="form-control" type="text" required [(ngModel)]="pesquisa.pergunta" id="pergunta" #pergunta="ngModel" name="pergunta" >
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="navbar-fixed-bottom main-footer" style="z-index: 999999999999999999;">
+    <button type="button" class="btn btn-lg btn-default" routerLink="/pesquisas">voltar</button>
+    <button type="submit" class="btn btn-primary btn-lg float-right" [disabled]="!f.form.valid" (click)="salvar(f)">Salvar</button>
+  </div>
+</form>
+</app-adm-template>

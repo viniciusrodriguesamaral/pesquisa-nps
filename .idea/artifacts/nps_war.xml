@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="nps:war">
+    <output-path>$PROJECT_DIR$/nps-ws/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>nps</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="nps-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="nps:war exploded" />
+    </root>
+  </artifact>
+</component>

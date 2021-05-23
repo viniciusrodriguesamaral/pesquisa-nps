@@ -1,0 +1,54 @@
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-light-primary elevation-4">
+  <a href="/home" class="brand-link logo-switch">
+<!--    <img src="assets/fav.ico" class="brand-image-xl logo-xs">-->
+    <img src="assets/sindepra.png" class="brand-image-xs logo-xl" style="left: 80px">
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <!--      <div class="user-panel mt-3 pb-3 mb-3 d-flex">-->
+    <!--        <div class="image">-->
+    <!--&lt;!&ndash;          <img src="assets/user.jpg" class="img-circle elevation-2" alt="User Image">&ndash;&gt;-->
+    <!--        </div>-->
+    <!--&lt;!&ndash;        <div class="info">&ndash;&gt;-->
+    <!--&lt;!&ndash;          <a href="#" class="d-block">Clínica Lorem Ipsum</a>&ndash;&gt;-->
+    <!--&lt;!&ndash;        </div>&ndash;&gt;-->
+    <!--      </div>-->
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu">
+        <li class="nav-item">
+          <a routerLinkActive="active" [routerLink]="['/home']" class="nav-link">
+            <i class="nav-icon fas fa-home"></i>
+            <p>
+              Home
+            </p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a routerLinkActive="active" [routerLink]="['/empresa']" class="nav-link">
+            <i class="nav-icon far fa-handshake"></i>
+            <p>
+              Empresas
+            </p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a routerLinkActive="active" [routerLink]="['/pesquisas']" class="nav-link">
+            <i class="nav-icon fas fa-clipboard"></i>
+            <p>
+              Pesquisas
+            </p>
+          </a>
+        </li>
+     </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>

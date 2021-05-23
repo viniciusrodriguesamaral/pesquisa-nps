@@ -1,0 +1,122 @@
+<app-adm-template [title]="TituloPagina" [breadcrumbs]="[['Empresa', '/empresa']]">
+<div class="row">
+  <div class="col-md-12">
+    <div class="card card-outline card-info">
+      <div class="card-header">
+        <h3 class="card-title">
+          Pesquisas cadastradas
+        </h3>
+      </div>
+
+      <div class="card-header">
+        <div class="ui-fluid p-formgrid p-grid">
+          <div  class="p-field p-col-12">
+            <label for="empre" >Informe a empresa</label>
+            <p-autoComplete
+              id="empre"
+              required
+              name="empre"
+              field="codigoDescricao"
+              [forceSelection]="true"
+              minLength="3"
+              (onClear)="filtro.empresa = undefined"
+              #empre="ngModel"
+              [(ngModel)]="filtro.empresa"
+              [suggestions]="listaEmpresa"
+              maxlength="150"
+              placeholder="Pesquisar cnpj, razão social ou fantasia da empresa "
+              title="Pesquisar cnpj, razão social ou fantasia da empresa"
+              [style]="{'width':'100%','border-radius':'0px','font-size':'13px', 'font-color':'#1b81d7'}"
+              (completeMethod)="pesquisaEmpresa($event)"
+              autocomplete="off"
+              size="100%"
+              (onBlur)="pesquisar(0)"
+              (click)="pesquisar(0)">
+
+              <ng-template let-emp pTemplate="selectedItem">
+                <strong>Código: </strong> {{emp.id }} - <strong>Razão Social: </strong>{{emp.razaoSocial}} - <strong>Fantasia: </strong>{{emp.fantasia}}
+              </ng-template>
+
+              <ng-template let-emp pTemplate="item">
+                <strong>Código: </strong> {{emp.id }} - <strong>Razão Social: </strong>{{emp.razaoSocial}} - <strong>Fantasia: </strong>{{emp.fantasia}}
+              </ng-template>
+            </p-autoComplete>
+            <!--              <small *ngIf="showError(cliente, f)" class="text-danger">-->
+            <!--                A empresa é obrigatório.-->
+            <!--              </small>-->
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body pad">
+        <p-table [value]="pesquisas"
+                 [paginator]="true"
+                 [rows]="filtro.itensPorPagina"
+                 [responsive]="true"
+                 [lazy]="true"
+                 [totalRecords]="totalRegistros"
+                 (onLazyLoad)="aoMudarPagina($event)"
+                 #tabela>
+
+          <ng-template pTemplate="emptymessage">
+            Nenhuma pesquisa encontrada
+          </ng-template>
+
+          <ng-template pTemplate="caption">
+            <div class="row">
+              <div class="col-md-6" style="text-align: left;">
+                <button type="button" routerLink="/novaPesquisa" class="btn btn-primary" title="Editar">
+                  <i class="fa fa-plus"></i> Novo
+                </button>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th style="width: 7%;">Status</th>
+              <th style="width: 45%;">Pesquisa</th>
+              <th style="width: 15%;">Empresa</th>
+              <th style="width: 25%;">
+                Ações
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-item>
+            <tr width=“100%”>
+              <td style="width: 7%;" class="text-center" ><i class="pi pi-circle-on" [style.color]="item.status=='ATIVO' ? '#00a65a' : '#CC000C'" ></i></td>
+              <td style="width: 45%;"><strong>Pergunta:</strong>{{item.pergunta}} <br /> <strong>Link:</strong> {{urlPesquisa}}{{item.token}}<img src='/assets/img/copy.svg' width="15px" height="15px" title="Copiar link da pesquisa" (click)="copyToClipboard(item.token)"  /><br /> <strong>Qtde Respostas:</strong> </td>
+              <td style="width: 15%;">{{item.empresa.razaoSocial}}</td>
+              <td style="width: 25%;" class="text-center">
+                <button type="button" class="btn btn-secondary" style="margin-right: 5px;" title="Resultado pesquisa" (click)="mostrarResultado(item)" >
+                  <i class="fa fa-chart-bar"></i>
+                </button>
+
+                <button type="button" class="btn btn-primary" style="margin-right: 5px;" title="Editar" (click)="editar(item.id)" >
+                  <i class="fa fa-edit"></i>
+                </button>
+
+                <button *ngIf="statusAtivo(item.status)" style="margin-right: 5px;" type="button" (click)="alternarStatus(item)" class="btn btn-success" title="Inativar pequisa">
+                  <i class="fa fa-toggle-on"></i>
+                </button>
+
+                <button *ngIf="!statusAtivo(item.status)" type="button" (click)="alternarStatus(item)"  class="btn btn-secondary" title="Ativar este pesquisa">
+                  <i class="fa fa-toggle-off"></i>
+                </button>
+
+                <button type="button" class="btn btn-danger" title="Excluir pesquisa"
+                        (click)="confirmaExclusao(item)">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>
+</app-adm-template>
+
+<p-dialog header="Resultado pesquisa" [(visible)]="exibindoFormularioGrafico" [responsive]="true" showEffect="fade" [modal]="true" [style]="{'width': '800px'}">
+  <app-grafico-pesquisa *ngIf="exibindoFormularioGrafico" [(resultadoPesquisa)]="resultadoPesquisa" [(data)]="data"  (actionBack)="fecharGrafico()" ></app-grafico-pesquisa>
+</p-dialog>
